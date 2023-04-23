@@ -45,6 +45,10 @@ main {
     background-color: #005f6b;
 }
 
+.car {
+    max-width: 50%;
+}
+
 #title-bar {
     background-color: #586e5a;
     color: white;
