@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Car</title>
+    <script src="jquery-3.6.4.min.js"></script>
+    <script>
+        function validateForm() {
+            var model = $('#model').val().trim();
+            var year = $('#year').val().trim();
+            var price = $('#price').val().trim();
+
+            if (model != "" && year != "" && price != "") {
+                console.log("Fields are valid...");
+                var formData = "model=" + model + "&year=" + year + "&price=" + price;
+                console.log(formData);
+                $.ajax({
+                    url: "http://localhost:5000/cars/create",
+                    type: "POST",
+                    data: formData,
+                    success: function (data) {
+                        $("#result").html(data['message']);
+                        $("#model, #year, #price").val("");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("Error: " + textStatus + " " + errorThrown);
+                    }
+                })
+            }
+            else {
+                alert("Some of the fields are empty");
+                location.reload();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Add New Car</h1>
+    <br>
+    <form method="POST" action="#">
+        model: <input type="text" name="model" id="model"><br>
+        year: <input type="text" name="year" id="year"><br>
+        price: <input type="text" name="price" id="price"><br>
+        <input type="button" value="Add car">
+        <!-- in the future, add a onClick="validateForm()" to the input button -->
+    </form><br>
+    <p id="result"></p>
+</body>
+
+</html>

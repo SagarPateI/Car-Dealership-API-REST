@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List Cars</title>
+    <script src="jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let $totalRecords = $('#totalRecords');
+            let $queryResults = $('#queryResults');
+            let $pageNo = $('#pageNo');
+            let $results = $('#results');
+            let $form = $('#form');
+
+            function getCars(currentPage = 1) {
+                let noRecords = parseInt($totalRecords.val());
+                if (noRecords < 1) {
+                    $queryResults.hide();
+                    alert('There are no records available!');
+                    return;
+                }
+
+                $pageNo.val(currentPage);
+                let model = $('#model').val().trim();
+                let year = $('#year').val().trim();
+                let orderBy = $('#orderBy').val();
+                let orderAscDesc = $('#orderAscDesc').val();
+                let limit = $('#limit').val();
+                let pageNo = $pageNo.val();
+
+                let parameters = `orderBy=${orderBy}&orderAscDesc=${orderAscDesc}&limit=${limit}&pageNo=${pageNo}`;
+                if (model) {
+                    parameters += `&model=${model}`;
+                }
+                if (year) {
+                    parameters += `&year=${year}`;
+                }
+
+                $.getJSON(`http://localhost:5000/cars?${parameters}`, function (data) {
+                    let cars = '';
+                    $.each(data, function (key, value) {
+                        cars += `<tr>`;
+                        cars += `<td>${value.id}</td>`;
+                        cars += `<td>${value.model}</td>`;
+                        cars += `<td>${value.year}</td>`;
+                        cars += `<td>${value.price}</td>`;
+                        cars += `<td><a href='edit_car.html?id=${value.id}'>Edit</a>&nbsp;&nbsp;<a href='http://localhost:5000/cars/delete/${value.id}'>Delete</a></td>`;
+                        cars += `</tr>`;
+                    });
+                    $results.html(`<tr><th>ID</th><th>model</th><th>Year</th><th>price number</th><th>Action</th></tr>${cars}`);
+                    $queryResults.show();
+                });
+            }
+
+            $form.submit(function (e) {
+                e.preventDefault();
+                getCars();
+            });
+
+            function getCarCount() {
+                $.getJSON('http://localhost:5000/cars/count', function (data) {
+                    $totalRecords.val(data[0].total);
+                });
+            }
+
+            getCarCount();
+        });
+    </script>
+</head>
+
+<body>
+    <h1>List Cars</h1>
+    <form id="form">
+        Model: <input type="text" name="model" id="model">&nbsp;&nbsp;
+        Year: <input type="text" name="year" id="year">&nbsp;&nbsp;
+        Limit: <input type="number" name="limit" id="limit" min="5" max="50" value="5">&nbsp;&nbsp;
+        Order:
+        <select name="orderBy" id="orderBy">
+            <option value="id">ID</option>
+            <option value="model">Model</option>
+            <option value="year">Year</option>
+        </select>
+        <select name="orderAscDesc" id="orderAscDesc">
+            <option value="asc">ASC</option>
+            <option value="desc">DESC</option>
+        </select>
+        &nbsp;&nbsp;
+        <button type="submit">Search</button>
+    </form>
+    <br>
+</body>
+
+</html>

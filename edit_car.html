@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Car</title>
+    <script src="jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const carId = urlParams.get('id');
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:5000/cars/' + carId,
+                success: function (data) {
+                    const car = data[0];
+                    $('#pageTitle').text(`Edit car with ID: ${cars.id}`);
+                    $('#carId').val(cars.id);
+                    $('#model').val(cars.model);
+                    $('#year').val(cars.year);
+                    $('#price').val(cars.price);
+                }
+            });
+        });
+        function validateForm() {
+            const model = $('#model').val().trim();
+            const year = $('#year').val().trim();
+            const price = $('#price').val().trim();
+            const id = $('#carId').val().trim();
+            if (model !== '' && year !== '' && price !== '') {
+                const formData = {
+                    model: model,
+                    year: year,
+                    price: price,
+                    carId: id
+                };
+                console.log(formData);
+                $.ajax({
+                    url: 'http://localhost:5000/cars/edit',
+                    type: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        $('#result').html(data.message);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(`Error: ${textStatus} ${errorThrown}`);
+                    }
+                });
+            } else {
+                alert('Some of the fields are empty');
+                location.reload();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="pageTitle">Edit Car</h1>
+    <form id="editForm" method="POST" action="#">
+        <input type="hidden" name="carId" id="carId" />
+        <label for="model">Model:</label>
+        <input type="text" name="model" id="model" /><br>
+        <label for="year">Year:</label>
+        <input type="text" name="year" id="year" /><br>
+        <label for="price">Price:</label>
+        <input type="text" name="price" id="price" /><br>
+        <input type="button" value="Edit Car" onClick="validateForm()" />
+    </form>
+    <p id="result"></p>
+</body>
+
+</html>
