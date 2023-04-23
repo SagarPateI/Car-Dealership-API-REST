@@ -5,17 +5,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
-    <title>Car Dealership Homepage</title>
+    <title>Car Dealership API REST Interface</title>
 </head>
 
 <body>
-    <h1>Welcome to the Car Dealership</h1>
-    <h2>Please select an option:</h2>
-    <div style="text-align:center;">
-        <a href="list_cars.html" class="button animate">List Cars</a>
-        <a href="add_car.html" class="button animate">Add Car</a>
-        <a href="edit_car.html" class="button animate">Edit Car</a>
+    <div id="title-bar">Welcome to the Car Dealership</div>
+    <div id="sidebar">
+        <a href="list_cars.html" class="button">List Cars</a>
+        <a href="add_car.html" class="button">Add Car</a>
+        <a href="edit_car.html" class="button">Edit Car</a>
     </div>
+    <div id="content">
+            <main>
+                <section class="hero">
+                    <h2>Find your dream car today</h2>
+                    <a href="list_cars.html" class="button">View Our Inventory</a>
+                </section>
+
+                <section class="services">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><i class="fas fa-car"></i> New and used car sales</li>
+                        <li><i class="fas fa-wrench"></i> Maintenance and repairs</li>
+                        <li><i class="fas fa-gas-pump"></i> Fuel and convenience store</li>
+                    </ul>
+                </section>
+
+                <section class="featured-cars">
+                    <h3>Featured Cars</h3>
+                    <div class="car-list">
+                        <div class="car">
+                            <img src="images\car1.jpg" alt="Car 1">
+                            <h4>2023 Blue Arrow GT</h4>
+                            <p>Introducing the all-new Blue Arrow GT, a racecar that's built for speed and performance.
+                                This stunning machine is the perfect blend of style and engineering, making it a dream
+                                come true for car enthusiasts everywhere.</p>
+                            <p>The Blue Arrow GT is powered by a powerful V8 engine, producing an impressive 600
+                                horsepower that can take you from 0 to 60 mph in just 3.5 seconds. With its aerodynamic
+                                design, you'll be able to slice through the air with ease and maintain control at high
+                                speeds.</p>
+                            <p>Don't miss your chance to own this one-of-a-kind racecar. The Blue Arrow GT is the
+                                perfect choice for anyone who wants to experience the thrill of the open road. Come take
+                                a test drive today and experience the power and performance of the Blue Arrow GT for
+                                yourself!</p>
+                            <a href="#" class="button">Learn More</a>
+                        </div>
+                        <div class="car">
+                            <img src="images\car2.jpg" alt="Car 2">
+                            <h4>2022 Red Blaze GT</h4>
+                            <p>Introducing the all-new Red Blaze GT, a car that's sure to turn heads wherever you go.
+                                With its sleek lines and bold design, this car is a true work of art. And now, for a
+                                limited time only, you can own this amazing machine for just $1,000,000!</p>
+                            <p>The Red Blaze GT is a true masterpiece of engineering, with a powerful engine that
+                                delivers unparalleled performance. And with its advanced suspension system, you'll be
+                                able to take corners like a pro.</p>
+                            <p>Of course, we also know that part of the reason for the high price tag is the market
+                                adjustment price increase. But trust us when we say that this car is worth every penny.
+                                The Red Blaze GT is the kind of car that you'll want to keep for a lifetime, passing it
+                                down to your children and grandchildren as a family heirloom.</p>
+                            <a href="#" class="button">Learn More</a>
+                        </div>
+                        <div class="car">
+                            <img src="images\car3.jpg" alt="Car 3">
+                            <h4>2019 Roadrunner GTR</h4>
+                            <p>Introducing the brand new Roadrunner GTR, a car that's as stylish as it is reliable. With
+                                its sleek, aerodynamic design, this car is sure to turn heads wherever you go.</p>
+                            <p>If you're looking for a car that's both stylish and reliable, look no further than the
+                                Roadrunner GTR. Come take a test drive today and experience the thrill of driving a car
+                                that's truly in a class of its own!</p>
+                            <p>Under the hood, the Roadrunner GTR is powered by a cutting-edge engine that delivers
+                                impressive performance. And with its advanced suspension system, you'll be able to take
+                                corners like a pro. Plus, the aero kit gives the car a sleek, sporty look that's sure to
+                                impress.</p>
+                            <a href="#" class="button">Learn More</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+    </div>
+    <div id="footer">&copy; 2023 Car Dealership</div>
 </body>
 
 </html>
